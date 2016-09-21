@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>DBLPProject</display-name>
+	<display-name>RouterServlet</display-name>
+	<welcome-file-list>
+		<welcome-file>home</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>routerServlet</servlet-name>
+		<servlet-class>comp9321.assignment2.bookstore.RouterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>routerServlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+		<url-pattern>/cart</url-pattern>
+		<url-pattern>/search</url-pattern>
+		<url-pattern>/next</url-pattern>
+		<url-pattern>/previous</url-pattern>
+	</servlet-mapping>
+</web-app>
