@@ -12,59 +12,22 @@
 					</h4>
 				</legend>
 			</div>
-
-			<!--Form Item item_name begin-->
-			<div class="form-group col-md-6">
-				<label name="item_name_label" class="col-md-3 control-label">Item
-					Name</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="item_name"
-						placeholder="Enter the Search Item Name"></input>
+			<!--Form Item Generic begin-->
+			<c:forEach var="field" items="${sessionScope.search_fields}">
+				<div class="form-group col-md-6">
+					<label name="<c:out value="${field.key}" />_label"
+						class="col-md-3 control-label"><c:out
+							value="${field.value}" /></label>
+					<div class="col-md-7">
+						<input type="text" class="form-control"
+							name="<c:out value="${field.key}" />"
+							placeholder="Enter the Search <c:out value="${field.value}" />"></input>
+					</div>
 				</div>
-			</div>
-			<!--Form Item 1 end-->
+				<!-- Form Item Generic End -->
+			</c:forEach>
 
-			<!--Form Item author begin-->
-			<div class="form-group col-md-6">
-				<label name="authors_label" class="col-md-3 control-label">Authors</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="authors"
-						placeholder="Enter the Search Author Names seperated by comma"></input>
-				</div>
-			</div>
-			<!--Form Item author end-->
-
-			<!--Form Item Publication begin-->
-			<div class="form-group col-md-6">
-				<label name="publication_label" class="col-md-3 control-label">Publication</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="publication"
-						placeholder="Enter the Publication Name"></input>
-				</div>
-			</div>
-			<!--Form Item Publication end-->
-
-			<!--Form Item Year begin-->
-			<div class="form-group col-md-6">
-				<label name="year_label" class="col-md-3 control-label">Year</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="year"
-						placeholder="Enter the Year"></input>
-				</div>
-			</div>
-			<!--Form Item Year end-->
-
-			<!--Form Item SellerID begin-->
-			<div class="form-group col-md-6">
-				<label name="sellerid_label" class="col-md-3 control-label">Seller</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="sellerid"
-						placeholder="Enter the Year"></input>
-				</div>
-			</div>
-			<!--Form Item SellerID end-->
-
-			<!--Form Item 2 begin-->
+			<!--Form Item Price begin-->
 			<div class="form-group col-md-6">
 				<label name="item_name_label" class="col-md-3 control-label">Price
 					Range</label>
@@ -82,7 +45,26 @@
 					<br />
 				</div>
 			</div>
-			<!--Form Item 2 end-->
+			<!--Form Item Price end-->
+
+			<!--Form Item Type begin-->
+			<div class="form-group col-md-6">
+				<label for="select" class="col-md-3 control-label">Document
+					Type</label>
+				<div class="col-md-7">
+					<select multiple="multiple" class="form-control" name="type">
+						<option value="article">Article</option>
+						<option value="inproceedings">Inproceedings</option>
+						<option value="proceedings">Proceedings</option>
+						<option value="book">Book</option>
+						<option value="incollection">Incollection</option>
+						<option value="phdthesis">PHD Thesis</option>
+						<option value="mastersthesis">Masters Thesis</option>
+						<option value="www">Web Resource</option>
+					</select>
+				</div>
+			</div>
+			<!--Form Item Type end-->
 
 			<br />
 			<!--Form Heading-->

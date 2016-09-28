@@ -19,5 +19,6 @@
 		<url-pattern>/search</url-pattern>
 		<url-pattern>/next</url-pattern>
 		<url-pattern>/previous</url-pattern>
+		<url-pattern>/check_out</url-pattern>
 	</servlet-mapping>
 </web-app>
