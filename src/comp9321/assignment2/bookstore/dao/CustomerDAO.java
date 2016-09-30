@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.mysql.jdbc.Statement;
-
+import comp9321.assignment2.bookstore.beans.CartLog;
 import comp9321.assignment2.bookstore.beans.ItemBean;
 
 public class CustomerDAO {
@@ -215,6 +215,57 @@ public class CustomerDAO {
 			}// end finally try
 		}// end try
 		return count;
+
+	}
+	
+	public static CartLog retrieveSavedCart(String query) {
+
+		Connection conn = null;
+		Statement stmt = null;
+		CartLog cart = new CartLog();
+
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			stmt = (Statement) conn.createStatement();
+
+			String sql = query;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				cart.setCart_id(rs.getInt("cart_id"));
+				cart.setUser_id(rs.getInt("user_id"));
+				cart.setItems(rs.getString("items_list"));
+				cart.setAction(rs.getString("action"));
+				cart.setPrice(rs.getFloat("price"));
+			}
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothing
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
+		return cart;
 
 	}
 

@@ -127,65 +127,61 @@ public class GraphDAO {
 
 	}
 
-	public static String keySearch(String key) {
-		GraphNode node = retrieveEntityNodes("select * from entity_store where value = '"
-				+ key + "'");
-
-		System.out.println(node.getStringValue());
-
-		String query = "SELECT * FROM graph_store where source="
-				+ node.getEntity_id();
-
-		ArrayList<GraphEdge> edges = retrieveGraphEdges(query);
-
-		for (GraphEdge edge : edges) {
-			System.out.println(edge.getStringValue());
-		}
+	public static ArrayList<GraphNode> retrtieveEntityNodesList(String query){
+		Connection conn = null;
+		Statement stmt = null;
 
 		ArrayList<GraphNode> nodes = new ArrayList<GraphNode>();
-		int node_count = 0;
-		int source_id = 0;
-		node.setGraph_node_id(0);
-		nodes.add(node);
 
-		for (GraphEdge edge : edges) {
-			node_count++;
-			String query_string = "SELECT * FROM entity_store WHERE entity_id="
-					+ edge.getTarget();
-			GraphNode n = retrieveEntityNodes(query_string);
-			n.setGraph_node_id(node_count);
-			edge.setSource_id(source_id);
-			edge.setTarget_id(node_count);
-			nodes.add(n);
-		}
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
 
-		Graph graph = new Graph();
-		graph.setEdges(edges);
-		graph.setNodes(nodes);
+			// STEP 3: Open a connection
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-		String JSONString = new String();
-		JSONString = "{\nnodes: [\n";
+			// STEP 4: Execute a query
+			stmt = (Statement) conn.createStatement();
 
-		for (GraphNode n : graph.getNodes()) {
-			JSONString += "{name: \"" + n.getName() + "\"},\n";
-		}
+			String sql = query;
+			ResultSet rs = stmt.executeQuery(sql);
+			// STEP 5: Extract data from result set
+			while (rs.next()) {
+				// Retrieve by column name
+				GraphNode node = new GraphNode();
+				node.setEntity_id(rs.getInt("entity_id"));
+				node.setAttribute(rs.getString("entity_attribute"));
+				node.setName(rs.getString("value"));
+				nodes.add(node);
 
-		JSONString = JSONString.substring(0, JSONString.length() - 2);
-		JSONString += "\n],\nedges: [\n";
+			}
+			rs.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothing
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
 
-		for (GraphEdge e : graph.getEdges()) {
-			JSONString += "{source: " + e.getSource_id() + ", target: "
-					+ e.getTarget_id() + ", label: \"" + e.getRelation()
-					+ "\"},\n";
-		}
-		JSONString = JSONString.substring(0, JSONString.length() - 1);
-		JSONString += "\n]\n};";
-
-		return JSONString;
+		return nodes;
 	}
 
 	public static void main(String[] args) {
-
+		
 	}
 
 }

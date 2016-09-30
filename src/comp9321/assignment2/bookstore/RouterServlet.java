@@ -15,8 +15,9 @@ import javax.servlet.http.HttpSession;
 import comp9321.assignment2.bookstore.beans.CartItem;
 import comp9321.assignment2.bookstore.beans.ItemBean;
 import comp9321.assignment2.bookstore.dao.CustomerDAO;
-import comp9321.assignment2.bookstore.dao.GraphDAO;
+import comp9321.assignment2.bookstore.helpers.CartLogger;
 import comp9321.assignment2.bookstore.helpers.FormBuilder;
+import comp9321.assignment2.bookstore.helpers.GraphSearch;
 import comp9321.assignment2.bookstore.helpers.QueryBuilder;
 
 /**
@@ -77,9 +78,9 @@ public class RouterServlet extends HttpServlet {
 					"/graph.jsp");
 			rd.forward(request, response);
 
-		}else if (action.equals("graph_search_form")) {
+		} else if (action.equals("graph_search_form")) {
 			System.out.println("Reaches graph search");
-			generate_form(request,response,session);
+			generate_form(request, response, session);
 		}
 
 	}
@@ -89,17 +90,18 @@ public class RouterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String search_key = request.getParameter("search_key");
 		String search_type = request.getParameter("search_type");
-		
-		if(search_type.equals("key")){
-			String json_data = GraphDAO.keySearch(search_key.trim());
-			
-			request.setAttribute("json_data", json_data);
-			response.setContentType("text/html;charset=UTF-8");
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(
-					"/graph_search.jsp");
-			rd.forward(request, response);
-			
+
+		String json_data = new String();
+
+		if (search_type.equals("key")) {
+			json_data = GraphSearch.keySearch(search_key.trim());
 		}
+
+		request.setAttribute("json_data", json_data);
+		response.setContentType("text/html;charset=UTF-8");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(
+				"/graph_search.jsp");
+		rd.forward(request, response);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -348,10 +350,12 @@ public class RouterServlet extends HttpServlet {
 			cart_items = (ArrayList<ItemBean>) session.getAttribute("cart");
 		}
 
+		ItemBean removed_item = new ItemBean(0, id, id);
 		// Remove the item to the customer cart
 		for (ItemBean item : cart_items) {
 			if (item.getId() == Integer.parseInt(id)) {
 				cart_items.remove(item);
+				removed_item = item;
 				break;
 			}
 		}
@@ -367,6 +371,16 @@ public class RouterServlet extends HttpServlet {
 			response_content = "";
 		}
 		printer.println(response_content);
+
+		// Log User activity
+		int user_id = -1;
+
+		if ((null != session.getAttribute("user_id"))) {
+			user_id = (int) session.getAttribute("user_id");
+		}
+
+		CartLogger.logUserActivity(user_id, removed_item.getId(), 0);
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -422,6 +436,15 @@ public class RouterServlet extends HttpServlet {
 				+ item.ItemList.get("title")
 				+ "')\">Remove</button></h6></div></div>";
 		printer.println(response_content);
+
+		// Log User activity
+		int user_id = -1;
+
+		if ((null != session.getAttribute("user_id"))) {
+			user_id = (int) session.getAttribute("user_id");
+		}
+
+		CartLogger.logUserActivity(user_id, item.getId(), 1);
 
 	}
 
