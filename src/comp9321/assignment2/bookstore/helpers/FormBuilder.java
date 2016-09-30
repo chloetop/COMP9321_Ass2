@@ -1,4 +1,4 @@
-package comp9321.assignment2.bookstore;
+package comp9321.assignment2.bookstore.helpers;
 
 import java.io.IOException;
 import java.util.HashMap;

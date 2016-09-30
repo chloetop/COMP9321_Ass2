@@ -1,6 +1,8 @@
-package comp9321.assignment2.bookstore;
+package comp9321.assignment2.bookstore.helpers;
 
 import java.util.HashMap;
+
+import comp9321.assignment2.bookstore.dao.CustomerDAO;
 
 public class QueryBuilder {
 
@@ -32,7 +34,7 @@ public class QueryBuilder {
 			String predicate = "(";
 			for (String value_string : value.split("\\,")) {
 				if(!key.equals("year")){
-					predicate += " " + key + " like '"
+					predicate += " item." + key + " like '"
 						+ encloseModulo(value_string) + "' OR";}
 				else{
 					predicate += " " + key + "="
@@ -80,7 +82,6 @@ public class QueryBuilder {
 			query += " OFFSET " + page_count * limit;
 		}
 		
-		
 
 		return query;
 	}
@@ -95,6 +96,10 @@ public class QueryBuilder {
 			query_value = query_value + " OFFSET " + page_count * limit;
 		}
 		return query_value;
+	}
+	
+	public static void insertUserActivity(){
+		
 	}
 
 	public static void main(String[] args) {
@@ -116,4 +121,5 @@ public class QueryBuilder {
 
 		System.out.println(rows);
 	}
+	
 }

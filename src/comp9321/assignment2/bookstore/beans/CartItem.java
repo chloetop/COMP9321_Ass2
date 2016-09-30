@@ -1,9 +1,9 @@
-package comp9321.assignment2.bookstore;
+package comp9321.assignment2.bookstore.beans;
 
 public class CartItem {
-	String title;
-	int quantity;
-	float unit_price;
+	public String title;
+	public int quantity;
+	public float unit_price;
 	
 	public float getUnit_price() {
 		return unit_price;

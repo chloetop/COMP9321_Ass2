@@ -14,7 +14,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.XMLEvent;
 
-import comp9321.assignment2.bookstore.CustomerDAO;
+import comp9321.assignment2.bookstore.dao.CustomerDAO;
 
 public class ReadXMLFile {
 

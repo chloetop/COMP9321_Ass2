@@ -1,10 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!--Content Data-->
 <c:if test="${fn:length(requestScope.item_list) == 0}">
-<div class="col-md-12">
-	<h5>Sorry, no matching datasets found!</h5>
-</div>
+	<div class="col-md-12">
+		<h5>Sorry, no matching datasets found!</h5>
+	</div>
 </c:if>
 <c:forEach items="${requestScope.item_list}" var="item">
 	<!-- Item -->
@@ -17,7 +17,7 @@
 			<div class="panel-heading">
 				<a id="myBtn_${itemId}" class="btn-primary btn-block btn-sm"
 					onclick="modal_open(<c:out value="${itemId}"></c:out>)"
-					style="margin-bottom: 4px; white-space: normal; height: 50px;cursor: pointer;">
+					style="margin-bottom: 4px; white-space: normal; height: 50px; cursor: pointer;">
 					<c:out value="${itemMap['title']}"></c:out>
 				</a>
 			</div>
@@ -33,7 +33,7 @@
 					</tr>
 					<tr>
 						<th>Price</th>
-						<td><c:out value="${itemMap['price']}"></c:out></td>
+						<td><c:out value="${itemMap['price']}"></c:out> AUD</td>
 					</tr>
 					<tr>
 						<th>Year</th>
@@ -72,10 +72,12 @@
 							<input type="hidden" name="item_id"
 								value="<c:out value="${itemId}"></c:out>" />
 							<c:forEach var="item_value" items="${itemMap}">
-								<tr>
-									<th><c:out value="${item_value.key}" /></th>
-									<td><c:out value="${item_value.value}" /></td>
-								</tr>
+								<c:if test="${item_value.key ne 'image_url'}">
+									<tr>
+										<th><c:out value="${item_value.key}" /></th>
+										<td><c:out value="${item_value.value}" /></td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</table>
 						<input type="hidden" name="form_action" value="add_cart" /> <input
@@ -102,10 +104,10 @@
 		</form>
 	</c:if>
 	<c:if test="${requestScope.previous eq 'true'}">
-	<form method="post" action="previous">
-		<input type="hidden" name="action" value="previous" /> <input
-			type="submit" class="btn btn-primary btn-sm previous pager"
-			value="<&nbsp;Previous">
-	</form>
+		<form method="post" action="previous">
+			<input type="hidden" name="action" value="previous" /> <input
+				type="submit" class="btn btn-primary btn-sm previous pager"
+				value="<&nbsp;Previous">
+		</form>
 	</c:if>
 </div>

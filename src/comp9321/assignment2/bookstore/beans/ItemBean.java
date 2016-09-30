@@ -1,4 +1,4 @@
-package comp9321.assignment2.bookstore;
+package comp9321.assignment2.bookstore.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class ItemBean {
 
 	
 
-	ItemBean(int id_value, String key_value, String authors) {
+	public ItemBean(int id_value, String key_value, String authors) {
 		id = id_value;
 		key = key_value;
 		setAuthors(authors);
@@ -55,7 +55,7 @@ public class ItemBean {
 
 		authors = new ArrayList<String>();
 
-		for (String author_value : authors_value.split("\\|")) {
+		for (String author_value : authors_value.split("\\,")) {
 			authors.add(author_value);
 
 		}

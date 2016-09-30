@@ -1,4 +1,4 @@
-package comp9321.assignment2.bookstore;
+package comp9321.assignment2.bookstore.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.mysql.jdbc.Statement;
+
+import comp9321.assignment2.bookstore.beans.ItemBean;
 
 public class CustomerDAO {
 

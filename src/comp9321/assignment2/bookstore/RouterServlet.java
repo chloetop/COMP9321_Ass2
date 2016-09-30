@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import comp9321.assignment2.bookstore.beans.CartItem;
+import comp9321.assignment2.bookstore.beans.ItemBean;
+import comp9321.assignment2.bookstore.dao.CustomerDAO;
+import comp9321.assignment2.bookstore.dao.GraphDAO;
+import comp9321.assignment2.bookstore.helpers.FormBuilder;
+import comp9321.assignment2.bookstore.helpers.QueryBuilder;
+
 /**
  * Servlet implementation class RouterServlet
  */
@@ -34,9 +41,7 @@ public class RouterServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
 		System.out.println("Hello from GET method");
-
 		build_index_page(request, response, session);
 
 	}
@@ -65,8 +70,36 @@ public class RouterServlet extends HttpServlet {
 			quick_search(request, response, session);
 		} else if (action.equals("checkout")) {
 			checkout(request, response, session);
+		} else if (action.equals("graph_search")) {
+
+			response.setContentType("text/html;charset=UTF-8");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(
+					"/graph.jsp");
+			rd.forward(request, response);
+
+		}else if (action.equals("graph_search_form")) {
+			System.out.println("Reaches graph search");
+			generate_form(request,response,session);
 		}
 
+	}
+
+	private void generate_form(HttpServletRequest request,
+			HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
+		String search_key = request.getParameter("search_key");
+		String search_type = request.getParameter("search_type");
+		
+		if(search_type.equals("key")){
+			String json_data = GraphDAO.keySearch(search_key.trim());
+			
+			request.setAttribute("json_data", json_data);
+			response.setContentType("text/html;charset=UTF-8");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(
+					"/graph_search.jsp");
+			rd.forward(request, response);
+			
+		}
 	}
 
 	@SuppressWarnings("unchecked")
