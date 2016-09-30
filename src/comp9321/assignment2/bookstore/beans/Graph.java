@@ -23,4 +23,12 @@ public class Graph {
 		this.edges = edges;
 	}
 
+	public void addNodes(ArrayList<GraphNode> nodes) {
+		this.nodes.addAll(nodes);
+	}
+
+	public void addEdges(ArrayList<GraphEdge> edges) {
+		this.edges.addAll(edges);
+	}
+
 }

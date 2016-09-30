@@ -94,7 +94,8 @@ public class RouterServlet extends HttpServlet {
 		String json_data = new String();
 
 		if (search_type.equals("key")) {
-			json_data = GraphSearch.keySearch(search_key.trim());
+			//json_data = GraphSearch.keySearch(search_key.trim());
+			json_data = GraphSearch.getJSONString(GraphSearch.buildGraphWithKey(search_key.trim()));
 		}
 
 		request.setAttribute("json_data", json_data);
