@@ -111,8 +111,11 @@ public class RouterServlet extends HttpServlet {
 		ArrayList<ItemBean> cartItems = new ArrayList<ItemBean>();
 		ArrayList<CartItem> checkoutItems = new ArrayList<CartItem>();
 
+		
+
 		cartItems = (ArrayList<ItemBean>) session.getAttribute("cart");
 		float total_price = 0;
+		String items_string = CartLogger.generateItemsList(cartItems);
 
 		for (ItemBean item : cartItems) {
 			boolean item_indicator = false;
@@ -142,6 +145,17 @@ public class RouterServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(
 				"/checkout.jsp");
 		rd.forward(request, response);
+
+		// Log the checkout
+
+		int user_id = -1;
+
+		if ((null != session.getAttribute("user_id"))) {
+			user_id = (int) session.getAttribute("user_id");
+		}
+
+		CartLogger
+				.logCartValues(user_id, items_string, "purchase", total_price);
 
 	}
 
@@ -391,6 +405,8 @@ public class RouterServlet extends HttpServlet {
 		ArrayList<ItemBean> cart_items = new ArrayList<ItemBean>();
 		boolean checkout_button = false;
 		String response_content = new String();
+		String cart_content = new String();
+		String cart_modal = new String();
 
 		ArrayList<ItemBean> current_cart = (ArrayList<ItemBean>) session
 				.getAttribute("cart");
@@ -417,24 +433,38 @@ public class RouterServlet extends HttpServlet {
 		// Add the item to the customer cart
 		cart_items.add(item);
 		session.setAttribute("cart", cart_items);
+		// response.setContentType("text/json");
 
 		if (checkout_button) {
-			response_content = "<div class=\"col-md-12\">"
+			cart_content = "<div class=\"col-md-12\">"
 					+ "<form method=\"post\" action=\"check_out\">"
 					+ "<input type=\"hidden\" name=\"action\" value=\"checkout\" /> <input"
 					+ " type=\"submit\" class=\"btn btn-success cart pager\""
 					+ "value=\"Checkout&nbsp;>\">" + "</form>" + "</div>";
 		}
 
-		response_content += "<div class=\"col-md-12 panel panel-primary\" id=\"cart_item"
+		cart_content += "<div class=\"col-md-12 panel panel-primary\" id=\"cart_item"
 				+ item.getId()
-				+ "\"><div><h6>"
+				+ "\"><div><h6><a id=\"cartBtn_"
+				+ item.getId()
+				+ "\" onclick=\"modal_cart_open("
+				+ item.getId()
+				+ ")\" style=\"cursor:pointer;font-size:14px;\">"
 				+ item.ItemList.get("title")
-				+ "<button class=\"btn btn-warning btn-xs cart\" onclick=\"removeCartItem('cart_item"
+				+ "</a><button class=\"btn btn-warning btn-xs cart\" onclick=\"removeCartItem('cart_item"
 				+ item.getId()
 				+ "','"
 				+ item.ItemList.get("title")
 				+ "')\">Remove</button></h6></div></div>";
+
+		cart_modal = generateCartModal(item);
+
+		cart_content = cart_content.replace("\"", "\\\"");
+		cart_modal = cart_modal.replace("\"", "\\\"");
+
+		response_content = "{\"cart\":\"" + cart_content + "\",\"modal\":\""
+				+ cart_modal + "\"}";
+
 		printer.println(response_content);
 
 		// Log User activity
@@ -446,6 +476,27 @@ public class RouterServlet extends HttpServlet {
 
 		CartLogger.logUserActivity(user_id, item.getId(), 1);
 
+	}
+
+	private String generateCartModal(ItemBean item) {
+		String cart_modal = "<div id=\"cartModal_" + item.getId() + "\""
+				+ "class=\"modal col-md-4\">" + "<div class=\"modal-content\">"
+				+ "<span class=\"close\"" + "onclick=\"close_cart_modal("
+				+ item.getId() + ")\">x&nbsp;</span>"
+				+ "<div class=\"panel panel-primary\">"
+				+ "<!--Panel Definition-->" + "<div class=\"panel-heading\">"
+				+ item.ItemList.get("title") + "</div>"
+				+ "<!--Panel heading-->" + "<div class=\"panel-body\">"
+				+ "<!--Panel Body-->" + "<table class=\"table table-striped\">";
+		for (String key : item.ItemList.keySet()) {
+			if (!key.equals("image_url")) {
+				cart_modal += "<tr><th>" + key + "</th><td>"
+						+ item.ItemList.get(key) + "</td></tr>";
+			}
+		}
+		cart_modal += "</table></div><!--Panel body end--></div><!--Panel Definition end--></div></div>";
+
+		return cart_modal;
 	}
 
 }

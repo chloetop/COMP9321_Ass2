@@ -38,8 +38,9 @@
 							id="cart_item<c:out value="${cartId}"></c:out>">
 							<div>
 								<h6>
-									<c:out value="${cartMap['title']}"></c:out>
-									<br />
+									<a id="cartBtn_${cartId}" onclick="modal_cart_open(${cartId})"
+										style="cursor: pointer; font-size: 14px;"><c:out
+											value="${cartMap['title']}"></c:out></a> <br />
 									<button class="btn btn-warning btn-xs cart"
 										onclick="removeCartItem('cart_item<c:out value="${cartId}"></c:out>','<c:out value="${cartMap['title']}"></c:out>')">Remove</button>
 								</h6>
@@ -48,7 +49,46 @@
 							</div>
 						</div>
 					</c:forEach>
-
+				</c:if>
+			</div>
+			<div id="modal_contents">
+				<c:if test="${fn:length(sessionScope.cart) > 0}">
+					<c:forEach items="${sessionScope.cart}" var="cart_item">
+						<c:set var="cartMap" value="${cart_item.getItemList()}" />
+						<c:set var="cartId" value="${cart_item.getId()}" />
+						<!-- Modal for the cart -->
+						<!-- Modal content -->
+						<div id="cartModal_<c:out value="${cartId}"></c:out>"
+							class="modal col-md-4">
+							<div class="modal-content">
+								<span class="close"
+								onclick="close_cart_modal(<c:out value="${cartId}"></c:out>)">x&nbsp;</span>
+								<div class="panel panel-primary">
+									<!--Panel Definition-->
+									<div class="panel-heading">
+										<c:out value="${cartMap['title']}"></c:out>
+									</div>
+									<!--Panel heading-->
+									<div class="panel-body">
+										<!--Panel Body-->
+										<table class="table table-striped">
+											<c:forEach var="cart_value" items="${cartMap}">
+												<c:if test="${cart_value.key ne 'image_url'}">
+													<tr>
+														<th><c:out value="${cart_value.key}" /></th>
+														<td><c:out value="${cart_value.value}" /></td>
+													</tr>
+												</c:if>
+											</c:forEach>
+										</table>
+									</div>
+									<!--Panel body end-->
+								</div>
+								<!--Panel Definition end-->
+							</div>
+						</div>
+						<!-- Cart modal end -->
+					</c:forEach>
 				</c:if>
 			</div>
 		</div>
