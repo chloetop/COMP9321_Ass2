@@ -23,6 +23,12 @@
 		<!--Home Page begin -->
 		<%@ include file="alert.jsp"%>
 		<div class="container-fluid" id="home">
+			<div class="col-md-12">
+				<h4>
+					<strong>Graph Search Results</strong>
+				</h4>
+				<h6 id="graph_error"></h6>
+			</div>
 			<%@ include file="graph_results.jsp"%>
 		</div>
 		<!--Home Page End-->

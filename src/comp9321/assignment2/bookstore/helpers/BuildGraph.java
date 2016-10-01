@@ -100,9 +100,9 @@ public class BuildGraph {
 
 	private static String returnName(String name) {
 		if (name == null) {
-			return "n";
+			return null;
 		} else if (name.isEmpty()) {
-			return "n";
+			return "";
 		}
 
 		return name;
@@ -117,7 +117,7 @@ public class BuildGraph {
 		}
 
 		JSONString = JSONString.substring(0, JSONString.length() - 2);
-		JSONString += "\n],\nedges: [\n";
+		JSONString += "\n],\nedges: [  \n";
 
 		int node_size = graph.getNodes().size();
 
@@ -133,14 +133,18 @@ public class BuildGraph {
 		}
 		JSONString = JSONString.substring(0, JSONString.length() - 2);
 		JSONString += "\n]\n};";
-		System.out.println(JSONString);
+		
+		if(graph.getEdges().isEmpty()){
+			JSONString ="{};";
+		}
+		
 		return JSONString;
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Graph graph = buildGraphWithYear("1996");
+		Graph graph = buildGraphWithYear("2013");
 
 		System.out.println(getJSONString(graph));
 

@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
-
+try{
     var w = 1000;
     var h = 600;
     var linkDistance=200;
@@ -129,5 +129,8 @@
                 }
         });
     });
-
+}
+catch(err){
+    document.getElementById("graph_error").innerHTML = "No matching results found!";
+}
 </script>
