@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import comp9321.assignment2.bookstore.beans.CartItem;
 import comp9321.assignment2.bookstore.beans.ItemBean;
 import comp9321.assignment2.bookstore.dao.CustomerDAO;
+import comp9321.assignment2.bookstore.helpers.BuildGraph;
 import comp9321.assignment2.bookstore.helpers.CartLogger;
 import comp9321.assignment2.bookstore.helpers.FormBuilder;
 import comp9321.assignment2.bookstore.helpers.GraphSearch;
@@ -100,11 +101,11 @@ public class RouterServlet extends HttpServlet {
 			json_data = GraphSearch.getJSONString(GraphSearch.buildAuthorGraph(
 					search_key.trim(), 0, 0));
 		} else if (search_type.equals("venue")) {
-			json_data = GraphSearch.getJSONString(GraphSearch.buildAuthorGraph(
-					search_key.trim(), 0, 0));
+			json_data = BuildGraph.getJSONString(BuildGraph
+					.buildGraphWithYear(search_key));
 		} else if (search_type.equals("year")) {
-			json_data = GraphSearch.getJSONString(GraphSearch.buildAuthorGraph(
-					search_key.trim(), 0, 0));
+			json_data = BuildGraph.getJSONString(BuildGraph
+					.buildGraphWithYear(search_key));
 		}
 
 		request.setAttribute("json_data", json_data);
