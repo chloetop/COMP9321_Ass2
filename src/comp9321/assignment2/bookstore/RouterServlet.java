@@ -93,9 +93,18 @@ public class RouterServlet extends HttpServlet {
 
 		String json_data = new String();
 
-		if (search_type.equals("key")) {
-			//json_data = GraphSearch.keySearch(search_key.trim());
-			json_data = GraphSearch.getJSONString(GraphSearch.buildGraphWithKey(search_key.trim()));
+		if (search_type.equals("publication")) {
+			json_data = GraphSearch.getJSONString(GraphSearch
+					.buildGraphWithKey(search_key.trim()));
+		} else if (search_type.equals("author")) {
+			json_data = GraphSearch.getJSONString(GraphSearch.buildAuthorGraph(
+					search_key.trim(), 0, 0));
+		} else if (search_type.equals("venue")) {
+			json_data = GraphSearch.getJSONString(GraphSearch.buildAuthorGraph(
+					search_key.trim(), 0, 0));
+		} else if (search_type.equals("year")) {
+			json_data = GraphSearch.getJSONString(GraphSearch.buildAuthorGraph(
+					search_key.trim(), 0, 0));
 		}
 
 		request.setAttribute("json_data", json_data);
@@ -111,8 +120,6 @@ public class RouterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<ItemBean> cartItems = new ArrayList<ItemBean>();
 		ArrayList<CartItem> checkoutItems = new ArrayList<CartItem>();
-
-		
 
 		cartItems = (ArrayList<ItemBean>) session.getAttribute("cart");
 		float total_price = 0;

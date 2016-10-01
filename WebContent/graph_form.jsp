@@ -28,9 +28,9 @@
 						class="form-control" name="search_type">
 						<option value="">Select</option>
 						<option value="author">Author</option>
-						<option value="key">Key</option>
+						<option value="publication">Publication</option>
+						<option value="venue">Venue</option>
 						<option value="year">Year</option>
-						<option value="publisher">Publication</option>
 					</select>
 				</div>
 				<!--Seach Type end-->

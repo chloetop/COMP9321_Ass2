@@ -82,7 +82,6 @@ public class QueryBuilder {
 			query += " OFFSET " + page_count * limit;
 		}
 		
-
 		return query;
 	}
 

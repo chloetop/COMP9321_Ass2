@@ -30,5 +30,16 @@ public class Graph {
 	public void addEdges(ArrayList<GraphEdge> edges) {
 		this.edges.addAll(edges);
 	}
+	
+	public void initializeGraph(){
+		nodes = new ArrayList<GraphNode>();
+		edges = new ArrayList<GraphEdge>();
+	}
+	
+	public void removeNode(GraphNode node){
+		if(this.nodes.contains(node)){
+			this.nodes.remove(node);
+		}
+	}
 
 }
