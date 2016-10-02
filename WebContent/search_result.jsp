@@ -9,6 +9,9 @@
 <!-- Viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Bootstrap CSS -->
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/script.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <title>dblp Store</title>
@@ -39,9 +42,6 @@
 
 	<!--Root page content end-->
 	<!-- Scripts -->
-	<script src="js/jquery-3.1.0.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/script.js"></script>
 	<%@ include file="quick_search.jsp"%>
 </body>
 </html>

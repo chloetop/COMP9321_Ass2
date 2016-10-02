@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/script.js"></script>
 <title>dblp Store</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
@@ -35,9 +38,7 @@
 
 	<!--Root page content end-->
 	<!-- Scripts -->
-	<script src="js/jquery-3.1.0.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/script.js"></script>
+
 	<%@ include file="quick_search.jsp"%>
 </body>
 </html>

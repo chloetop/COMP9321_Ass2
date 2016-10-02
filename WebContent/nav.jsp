@@ -34,7 +34,7 @@
 		</form> -->
 		<!--Title Search form end-->
 		<ul class="nav navbar-nav navbar-right">
-		<script>
+ 		<script>
         	$(document).ready(function(){
         		$("#logout_link").click(function(){
         			$.ajax({
@@ -51,10 +51,14 @@
 						}); 
         		});
         	});
-        </script>
+        </script> 
 		<c:if test="${empty sessionScope.user_id}">
 			<li onclick="onClick()"><a href="#"
 				onclick="openPage(event, 'login')">Login</a></li>
+				</c:if>
+				<c:if test="${empty sessionScope.user_id}">
+			<li onclick="onClick()"><a href="#"
+				onclick="openPage(event, 'login')">Admin Login</a></li>
 				</c:if>
 				<c:if test="${not empty sessionScope.user_id && sessionScope.admin_status == 0}">
 				<li onclick="onClick()"><a href="#"

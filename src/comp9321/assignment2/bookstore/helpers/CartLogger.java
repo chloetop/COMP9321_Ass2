@@ -53,7 +53,11 @@ public class CartLogger {
 			list += item.getId() + ",";
 		}
 
-		list = list.substring(0, list.length() - 1);
+		try{
+			list = list.substring(0, list.length() - 1);
+		}catch(Exception e){
+			System.out.println("String Index Went out of bound. Probably you were trying to remove from Empty cart.");
+		}
 
 		return list;
 	}

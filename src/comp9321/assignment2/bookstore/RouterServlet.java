@@ -134,7 +134,7 @@ public class RouterServlet extends HttpServlet {
 				output += "<center><table width='100%' class='table table-bordered table-striped table-text-center'>";  
 			    output += "<tr><th>Activity ID</th><th>Item Name</th><th>Activity Type</th><th>Timestamp</th></tr>"; 
 				while(rs.next()){
-					if(rs.getString("activity_type") == "0"){
+					if(rs.getInt("activity_type") == 0){
 				    	act_type = "Removed from Cart";
 				    }
 					else{
@@ -277,7 +277,7 @@ public class RouterServlet extends HttpServlet {
 		int user_id = -1;
 
 		if ((null != session.getAttribute("user_id"))) {
-			user_id = (int) session.getAttribute("user_id");
+			user_id = (Integer) session.getAttribute("user_id");
 		}
 
 		CartLogger
@@ -347,7 +347,7 @@ public class RouterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// get the session attributes
 		String query = (String) session.getAttribute("query_string");
-		int page_count = (int) session.getAttribute("page_count");
+		int page_count = (Integer)session.getAttribute("page_count");
 		boolean previous = false;
 
 		// set the session attributes
@@ -499,8 +499,8 @@ public class RouterServlet extends HttpServlet {
 			HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
 		// get the session attributes
-		String query = (String) session.getAttribute("query_string");
-		int page_count = (int) session.getAttribute("page_count");
+		String query = session.getAttribute("query_string").toString();
+		int page_count = (Integer)session.getAttribute("page_count");
 		boolean next = false;
 
 		// set the session attributes
@@ -638,7 +638,7 @@ public class RouterServlet extends HttpServlet {
 		int user_id = -1;
 
 		if ((null != session.getAttribute("user_id"))) {
-			user_id = (int) session.getAttribute("user_id");
+			user_id = Integer.parseInt(session.getAttribute("user_id").toString()) ;
 		}
 
 		CartLogger.logUserActivity(user_id, removed_item.getId(), 0);
@@ -719,7 +719,7 @@ public class RouterServlet extends HttpServlet {
 		int user_id = -1;
 
 		if ((null != session.getAttribute("user_id"))) {
-			user_id = (int) session.getAttribute("user_id");
+			user_id = Integer.parseInt(session.getAttribute("user_id").toString());
 		}
 
 		CartLogger.logUserActivity(user_id, item.getId(), 1);

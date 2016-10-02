@@ -78,3 +78,4 @@
 	</form>
 	<!--Search query form end-->
 </div>
+<%@ include file="login.jsp"%>

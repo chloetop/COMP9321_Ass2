@@ -18,7 +18,7 @@ public class GraphDAO {
 
 	// Database credentials
 	static final String USER = "root";
-	static final String PASS = "root";
+	static final String PASS = "pvce@2016";
 
 	public static GraphNode retrieveEntityNodes(String query) {
 		Connection conn = null;

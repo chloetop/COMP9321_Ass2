@@ -86,7 +86,7 @@
 				address = "";
 			}
 
-			if (session.getAttribute("CC") != null) {
+			if (session.getAttribute("cc") != null) {
 				cc = " XXXX XXXX XXXX "
 						+ session
 								.getAttribute("cc")
@@ -94,6 +94,7 @@
 								.substring(
 										session.getAttribute("cc").toString()
 												.length() - 4);
+		
 			} else {
 				cc = "";
 			}

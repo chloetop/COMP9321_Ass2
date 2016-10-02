@@ -1,4 +1,3 @@
-$("#switch_user").bootstrapSwitch('setSizeClass', '');
 function openNav() {
 	document.getElementById("mySidenav").style.width = "450px";
 	document.getElementById("main").style.marginLeft = "450px";
@@ -33,6 +32,7 @@ function openPage(evt, page) {
 		document.getElementById("home").style.display = "none";
 		document.getElementById("search").style.display = "none";
 	}
+//	window.location.replace("home");
 }
 
 function toggleIcon(e) {
