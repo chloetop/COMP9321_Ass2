@@ -8,25 +8,33 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/annotations-api.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/catalina.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/catalina-ant.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/catalina-ha.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/catalina-tribes.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/ecj-4.2.2.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/el-api.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/jasper.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/jasper-el.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-api.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-coyote.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-dbcp.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-i18n-es.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-i18n-fr.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-i18n-ja.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-jdbc.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/tomcat-util.jar"/>
-	<classpathentry kind="lib" path="/home/jose/apache-tomcat-7.0.42/lib/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/ecj-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/jaspic-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/lib/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/activation.jar"/>
+	<classpathentry kind="lib" path="/usr/local/Cellar/tomcat/8.5.5/libexec/lib/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

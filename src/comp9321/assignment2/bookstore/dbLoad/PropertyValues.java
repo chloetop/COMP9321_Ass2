@@ -29,7 +29,7 @@ public class PropertyValues {
 			value = prop.getProperty(key);
 
 		} catch (Exception e) {
-			System.out.println("Exception: " + e);
+			//System.out.println("Exception: " + e);
 		} finally {
 			inputStream.close();
 		}
@@ -38,7 +38,7 @@ public class PropertyValues {
 
 	public static void main(String args[]) {
 		try {
-			System.out.println(new PropertyValues()
+			//System.out.println(new PropertyValues()
 					.getPropValues("document_types"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

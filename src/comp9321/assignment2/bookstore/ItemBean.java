@@ -1,5 +1,9 @@
 package comp9321.assignment2.bookstore;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ItemBean {
@@ -92,6 +96,37 @@ public class ItemBean {
 
 	public void setURL(String uRL) {
 		URL = uRL;
+	}
+	
+	public static String searchItem(String name){
+		String output = "";
+		try{  
+		    Class.forName("com.mysql.jdbc.Driver");  
+		    Connection con=DriverManager.getConnection("jdbc:mysql://localhost/bookstore?autoReconnect=true&useSSL=false","root","pvce@2016");
+		    PreparedStatement ps=con.prepareStatement("SELECT * FROM item WHERE MATCH ( title, author, editor, booktitle, address, journal, publisher, note, isbn, school, chapter, publtype, type) AGAINST ('"+name+"' IN NATURAL LANGUAGE MODE) LIMIT 1000;");  
+		    ResultSet rs=ps.executeQuery();  
+		      
+		    if(!rs.isBeforeFirst()) {      
+		    output= null;   
+		    }else{  
+		    output += "<center><table width='100%' class='table table-bordered table-striped table-text-center'>";  
+		    output += "<tr><th>Item ID</th><th>Item Name</th><th>Author</th><th>Account Status</th></tr>";  
+		    String button= null;
+		    while(rs.next()){
+		    	if(Integer.valueOf(rs.getString("enabled_status")) == Integer.valueOf(1)){
+		    		button = "<a href=\"#\" onclick=\"toggleItemStatus("+rs.getString("id")+", 0);return false;\" class=\"btn btn-danger\" id='toggle_item' role=\"button\">Disable Item</a>";
+		    	}
+		    	else{
+		    		button = "<a href=\"#\" onclick=\"toggleItemStatus("+rs.getString("id")+", 1);return false;\" class=\"btn btn-success\" id='toggle_item' role=\"button\">Enable Item</a>";
+		    	}
+		    	output += "<tr><td>"+rs.getString("id")+"</td><td>"+rs.getString("title")+"</td><td>"+rs.getString("author")+"</td> <td>"+button+"</td></tr>";  
+		    }  
+		    output += "</table><center>";
+		    
+		    }//end of else for rs.isBeforeFirst		    
+		    con.close(); 		    
+		    }catch(Exception e){e.printStackTrace();}
+		return output;
 	}
 
 

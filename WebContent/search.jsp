@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="container-fluid" id="search" style="display: none;">
+<div class="container-fluid" id="search" style="display: none;padding-top: 2em;">
 	<!--Search Query Form-->
 	<form class="form-horizontal" action="search" method="post">
 		<input type="hidden" name="action" value="advanced_search" />

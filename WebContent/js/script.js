@@ -1,3 +1,4 @@
+$("#switch_user").bootstrapSwitch('setSizeClass', '');
 function openNav() {
 	document.getElementById("mySidenav").style.width = "450px";
 	document.getElementById("main").style.marginLeft = "450px";
@@ -20,12 +21,28 @@ function openPage(evt, page) {
 
 	if (page === "home") {
 		document.getElementById("search").style.display = "none";
+		document.getElementById("login").style.display = "none";
 	}
 
 	if (page === "search") {
 		document.getElementById("home").style.display = "none";
+		document.getElementById("login").style.display = "none";
+	}
+	
+	if (page === "login") {
+		document.getElementById("home").style.display = "none";
+		document.getElementById("search").style.display = "none";
 	}
 }
+
+function toggleIcon(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-plus glyphicon-minus');
+}
+$('.panel-group').on('hidden.bs.collapse', toggleIcon);
+$('.panel-group').on('shown.bs.collapse', toggleIcon);
 
 function modal_open(hashcode) {
 	var modal = document.getElementById("myModal_".concat(hashcode));
@@ -43,6 +60,67 @@ $(document).ready(function() {
 	$("#item_remove_success").hide();
 
 });
+
+$(function() {
+
+    $('#login-form-link').click(function(e) {
+		$("#login-form").delay(100).fadeIn(100);
+ 		$("#register-form").fadeOut(100);
+		$('#register-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+	$('#register-form-link').click(function(e) {
+		$("#register-form").delay(100).fadeIn(100);
+ 		$("#login-form").fadeOut(100);
+		$('#login-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+
+});
+
+function toggleUsrStatus(userID,action){
+	$.ajax({
+		type: "POST",
+		url:"home",
+		data:{"user":userID,"toggle_action":action, "action":"toggle_user"},
+		success: function (data) {
+			if(data=='True'){
+				alert("Action complete");
+				 }else{
+						alert('Action failed');
+				}
+			}
+		});
+}
+
+function showActivity(userID){
+	$.ajax({
+		type: "POST",
+		url:"home",
+		data:{"user":userID, "action":"search_results_userAct_usr"},
+		success: function (data) {
+			$('#activity_table').html(data);
+			console.log(data);
+			}
+		});
+}
+
+function toggleItemStatus(userID,action){
+	$.ajax({
+		type: "POST",
+		url:"home",
+		data:{"item":userID,"toggle_action":action, "action":"toggle_item"},
+		success: function (data) {
+			if(data=='True'){
+				alert("Action complete");
+				 }else{
+						alert('Action failed');
+				}
+			}
+		});
+}
 
 // add item to the cart
 function addToCart(hashcode) {
@@ -156,6 +234,17 @@ function quicksearch_open() {
 
 function close_quicksearch() {
 	var modal = document.getElementById("quicksearch");
+	modal.style.display = "none";
+}
+
+function login_open() {
+	var modal = document.getElementById("login");
+	modal.style.display = "block";
+
+}
+
+function close_login() {
+	var modal = document.getElementById("login");
 	modal.style.display = "none";
 }
 

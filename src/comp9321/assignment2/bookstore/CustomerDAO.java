@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import com.mysql.jdbc.Statement;
 
-public class CustomerDAO {
+public class CustomerDAO{
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -16,8 +17,8 @@ public class CustomerDAO {
 
 	// Database credentials
 	static final String USER = "root";
-	static final String PASS = "root";
-
+	static final String PASS = "pvce@2016";
+	
 	public static ArrayList<ItemBean> runQuery(String query) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -40,8 +41,8 @@ public class CustomerDAO {
 			while (rs.next()) {
 				// Retrieve by column name
 				ItemBean item = new ItemBean(rs.getInt("id"),
-						rs.getString("item_name"), rs.getString("Authors"),
-						rs.getString("publication"), rs.getInt("year"),
+						rs.getString("title"), rs.getString("author"),
+						rs.getString("publisher"), rs.getInt("year"),
 						rs.getString("url"), rs.getInt("seller_id"),
 						rs.getFloat("price"));
 				items_list.add(item);
@@ -71,6 +72,8 @@ public class CustomerDAO {
 		return items_list;
 
 	}
+	
+	
 
 	public static void executeQuery(String query) {
 
@@ -116,17 +119,16 @@ public class CustomerDAO {
 	public static void main(String[] args) {
 		ArrayList<ItemBean> items_list = runQuery("select * from item");
 
-		for (ItemBean item : items_list) {
-			System.out.println("ID: " + item.getId());
-			System.out.println("Name: " + item.getItem_name());
-			System.out.println("Authors: " + item.getAuthors().get(0) + ", "
-					+ item.getAuthors().get(1));
-			System.out.println("Pub: " + item.getPublication());
-			System.out.println("Year: " + item.getYear());
-			System.out.println("URL: " + item.getURL());
-			System.out.println("SellerID: " + item.getSeller_id());
-			System.out.println("Price: " + item.getPrice() + "\n");
-		}
+//		for (ItemBean item : items_list) {
+			//System.out.println("ID: " + item.getId());
+			//System.out.println("Name: " + item.getItem_name());
+			//System.out.println("Authors: " + item.getAuthors().get(0) + ", "+ item.getAuthors().get(1));
+			//System.out.println("Pub: " + item.getPublication());
+			//System.out.println("Year: " + item.getYear());
+			//System.out.println("URL: " + item.getURL());
+			//System.out.println("SellerID: " + item.getSeller_id());
+			//System.out.println("Price: " + item.getPrice() + "\n");
+//		}
 
 	}// end main
 

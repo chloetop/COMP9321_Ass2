@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!--Content Data-->
 <c:forEach items="${requestScope.item_list}" var="item">
 	<!-- Item -->
@@ -11,7 +12,7 @@
 				<button id="myBtn_<c:out value="${item.id}"></c:out>"
 					class="btn btn-primary  btn-block btn-sm"
 					onclick="modal_open(<c:out value="${item.id}"></c:out>)">
-					<c:out value="${item.item_name}"></c:out>
+					<c:out value="${fn:substring(item.item_name,0,35)+='...'}"></c:out>
 				</button>
 			</div>
 			<!--Panel heading-->

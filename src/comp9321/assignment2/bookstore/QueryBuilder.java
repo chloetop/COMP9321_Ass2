@@ -15,13 +15,13 @@ public class QueryBuilder {
 		query = "SELECT * FROM item WHERE";
 
 		if (item_name != null && !item_name.isEmpty()) {
-			query += " item_name like '" + encloseModulo(item_name) + "'";
+			query += " title like '" + encloseModulo(item_name) + "'";
 			add_and = true;
 		}
 		if (publication != null && !publication.isEmpty()) {
 			if (add_and)
 				query += " AND ";
-			query += " publication like '" + encloseModulo(publication) + "'";
+			query += " publisher like '" + encloseModulo(publication) + "'";
 			add_and = true;
 		}
 		if (seller_id != null && !seller_id.isEmpty()) {
@@ -40,7 +40,7 @@ public class QueryBuilder {
 			if (add_and)
 				query += " AND ";
 			for (String author : author_line.split("\\,")) {
-				query += " authors like '" + encloseModulo(author) + "' OR";
+				query += " author like '" + encloseModulo(author) + "' OR";
 			}
 			query = query.substring(0, query.length() - 2);
 			add_and = true;
@@ -87,7 +87,7 @@ public class QueryBuilder {
 		int page_count = 0;
 		String query = buildQuery(item_name, publication, seller_id,
 				author_line, year, price_min, price_max, 12, 1);
-		System.out.println(query);
-		System.out.println(changeQueryOffset(query, 3, 12));
+		//System.out.println(query);
+		//System.out.println(changeQueryOffset(query, 3, 12));
 	}
 }

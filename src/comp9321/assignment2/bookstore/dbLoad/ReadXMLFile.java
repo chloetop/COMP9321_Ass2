@@ -255,7 +255,7 @@ public class ReadXMLFile {
 						randInt(5, 500)+", "+
 						"'1000', '', 1)";
 				
-				//System.out.println(query);
+				////System.out.println(query);
 				CustomerDAO.executeQuery(query);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
