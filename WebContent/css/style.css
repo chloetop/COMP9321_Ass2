@@ -12,6 +12,11 @@ body {
 	float: left;
 }
 
+.navbar-right {
+    float: right !important;
+    margin-right: 15px;
+}
+
 .form-small .control-label {
     width: 100px;
 }

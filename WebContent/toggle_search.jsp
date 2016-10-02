@@ -1,4 +1,4 @@
-    <%@ page import="java.sql.*, comp9321.assignment2.bookstore.*" %>  
+    <%@ page import="java.sql.*, comp9321.assignment2.bookstore.dao.*, comp9321.assignment2.bookstore.beans.*" %>  
     <%  
     String name = request.getParameter("val");
     String target = request.getParameter("target");

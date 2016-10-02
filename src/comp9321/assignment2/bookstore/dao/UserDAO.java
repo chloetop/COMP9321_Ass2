@@ -1,7 +1,7 @@
 /**
  * 
  */
-package comp9321.assignment2.bookstore;
+package comp9321.assignment2.bookstore.dao;
 
 import java.math.BigInteger;
 import java.sql.*;
