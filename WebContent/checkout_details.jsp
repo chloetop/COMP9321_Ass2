@@ -10,18 +10,23 @@
 				<th>Quantity</th>
 				<th>Unit Price</th>
 			</tr>
-			<c:forEach items="${requestScope.checkout_items}" var="item">
+			<c:forEach items="${sessionScope.checkout_items}" var="item">
 				<tr>
 					<td><c:out value="${item.title}" /></td>
 					<td><c:out value="${item.quantity}" /></td>
-					<td><c:out value="${item.unit_price}" /></td>
+					<td><c:out value="${item.unit_price}" /> AUD</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<h6>
 			<strong>Total Price:</strong>
-			<c:out value="${requestScope.total_price}" />
+			<c:out value="${sessionScope.total_price}" />
+			AUD
 		</h6>
 	</div>
 </div>
+<%
+	session.setAttribute("total_price", "");
+	session.setAttribute("checkout_items", "");
+%>
 <!-- Check out panel end -->

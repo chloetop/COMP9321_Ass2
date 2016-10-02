@@ -80,8 +80,9 @@ public class RouterServlet extends HttpServlet {
 			rd.forward(request, response);
 
 		} else if (action.equals("graph_search_form")) {
-			System.out.println("Reaches graph search");
 			generate_form(request, response, session);
+		}else if(action.equals("checkout_done")){
+			checkout_done(request, response, session);
 		}
 
 	}
@@ -119,8 +120,23 @@ public class RouterServlet extends HttpServlet {
 	private void checkout(HttpServletRequest request,
 			HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset=UTF-8");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher(
+				"/checkout.jsp");
+		rd.forward(request, response);
+
+	}
+
+	private void checkout_done(HttpServletRequest request,
+			HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
 		ArrayList<ItemBean> cartItems = new ArrayList<ItemBean>();
 		ArrayList<CartItem> checkoutItems = new ArrayList<CartItem>();
+
+		String email = request.getParameter("email");
+		String address = request.getParameter("full_address");
+		String purchase_card = request.getParameter("CC");
 
 		cartItems = (ArrayList<ItemBean>) session.getAttribute("cart");
 		float total_price = 0;
@@ -148,12 +164,10 @@ public class RouterServlet extends HttpServlet {
 
 		session.setAttribute("cart", new ArrayList<ItemBean>());
 
-		request.setAttribute("checkout_items", checkoutItems);
-		request.setAttribute("total_price", total_price);
+		session.setAttribute("checkout_items", checkoutItems);
+		session.setAttribute("total_price", total_price);
 		response.setContentType("text/html;charset=UTF-8");
-		RequestDispatcher rd = getServletContext().getRequestDispatcher(
-				"/checkout.jsp");
-		rd.forward(request, response);
+		response.getWriter().write("True");
 
 		// Log the checkout
 
@@ -164,7 +178,7 @@ public class RouterServlet extends HttpServlet {
 		}
 
 		CartLogger
-				.logCartValues(user_id, items_string, "purchase", total_price);
+				.logCartValues(user_id, items_string, "purchase", total_price,email,address,purchase_card);
 
 	}
 

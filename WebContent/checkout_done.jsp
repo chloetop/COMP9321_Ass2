@@ -11,7 +11,6 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
-<script src="js/jquery-3.1.0.min.js"></script>
 <title>dblp Store</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
@@ -27,9 +26,10 @@
 				<h4>
 					<strong>Checkout</strong>
 				</h4>
-				<h6>Please update and verify the following details:</h6>
+				<h6>A purchase order has been raised for the following items.
+					Please find the details below:</h6>
 			</div>
-			<%@ include file="checkout_form.jsp"%>
+			<%@ include file="checkout_details.jsp"%>
 		</div>
 		<!--Home Page End-->
 		<!--Search Page Begin-->
@@ -41,6 +41,7 @@
 
 	<!--Root page content end-->
 	<!-- Scripts -->
+	<script src="js/jquery-3.1.0.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/script.js"></script>
 	<%@ include file="quick_search.jsp"%>

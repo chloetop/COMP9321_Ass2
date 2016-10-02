@@ -19,10 +19,10 @@ public class CartLogger {
 	}
 
 	public static void logCartValues(int user_id, String items, String action,
-			float price) {
+			float price, String email, String address, String purchase_card) {
 		String query = new String();
 		if (price > 0) {
-			query = "INSERT INTO cart_log(user_id,items_list,action,price) VALUES("
+			query = "INSERT INTO cart_log(user_id,items_list,action,price,email,address,purchase_card) VALUES("
 					+ user_id
 					+ ",'"
 					+ items
@@ -30,7 +30,13 @@ public class CartLogger {
 					+ action
 					+ "',"
 					+ price
-					+ ")";
+					+ ",'"
+					+ email
+					+ "','"
+					+ address
+					+ "','"
+					+ purchase_card
+					+ "')";
 		} else {
 			query = "INSERT INTO cart_log(user_id,items_list,action) VALUES("
 					+ user_id + ",'" + items + "','" + action + "')";
@@ -66,13 +72,15 @@ public class CartLogger {
 
 		return items;
 	}
-	
+
 	public static void main(String[] args) {
-		ArrayList<ItemBean> items = CustomerDAO.runQuery("select * from item where author like '%Mark%' LIMIT 5");
-		
+		ArrayList<ItemBean> items = CustomerDAO
+				.runQuery("select * from item where author like '%Mark%' LIMIT 5");
+
 		System.out.println(generateItemsList(items));
-		
-		ArrayList<ItemBean> items2 = CustomerDAO.runQuery("select * from item where id IN(21,183,282,295,301)");
+
+		ArrayList<ItemBean> items2 = CustomerDAO
+				.runQuery("select * from item where id IN(21,183,282,295,301)");
 		System.out.println(generateItemsList(items2));
 	}
 
