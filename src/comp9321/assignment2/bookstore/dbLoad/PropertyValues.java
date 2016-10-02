@@ -37,13 +37,12 @@ public class PropertyValues {
 	}
 
 	public static void main(String args[]) {
-		try {
-			//System.out.println(new PropertyValues()
-					.getPropValues("document_types"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			//System.out.println(new PropertyValues().getPropValues("document_types"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }
